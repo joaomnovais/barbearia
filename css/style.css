@@ -570,3 +570,86 @@ td {
 
     text-align: center;
 }
+
+/* ========================= CLIENTES ========================= */
+.client-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+.form-group input {
+    padding: 13px;
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 7px;
+    color: white;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #d4af37;
+}
+
+.alert-success {
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #164d28;
+    color: #65df86;
+    border-radius: 7px;
+}
+
+.alert-error {
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #511c1c;
+    color: #ff8585;
+    border-radius: 7px;
+}
+
+.client-count {
+    color: #d4af37;
+}
+
+.btn-edit,
+.btn-delete {
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.btn-edit {
+    background: #244d72;
+    color: #8bc7ff;
+}
+
+.btn-delete {
+    background: #511c1c;
+    color: #ff8585;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    padding: 30px;
+}
+
+@media (max-width: 900px) {
+    .client-form {
+        grid-template-columns: 1fr;
+    }
+}
