@@ -653,3 +653,23 @@ td {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ESTILIZAÇÃO DO CLIENTE EDITAR */
+
+.edit-form {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn-cancel {
+    display: inline-block;
+    width: fit-content;
+    padding: 12px 20px;
+    background: #333;
+    color: white;
+    border-radius: 7px;
+    text-decoration: none;
+}
