@@ -1,65 +1,65 @@
 <?php
 
-session_start();
+    session_start();
 
-if (!isset($_SESSION["utilizador_id"])) {
-    header("Location: index.php");
-    exit;
-}
+    if (!isset($_SESSION["utilizador_id"])) {
+        header("Location: index.php");
+        exit;
+    }
 
-require_once "config/database.php";
+    require_once "config/database.php";
 
-$mensagem = "";
-$tipoMensagem = "";
+    $mensagem = "";
+    $tipoMensagem = "";
 
-// CADASTRAR SERVIÇO
+    // CADASTRAR SERVIÇO
 
-if ($_SERVER["REQUEST_METHOD"] === "post") {
+    if ($_SERVER["REQUEST_METHOD"] === "post") {
 
-    $nome = trim($_POST["nome"]);
-    $preco = trim($_POST["preco"]);
-    $duracao = trim($_POST["duracao"]);
+        $nome = trim($_POST["nome"]);
+        $preco = trim($_POST["preco"]);
+        $duracao = trim($_POST["duracao"]);
 
-    if (empty($nome) || empty($preco) || $duracao <= 0) {
+        if (empty($nome) || empty($preco) || $duracao <= 0) {
 
-        $mensagem = "Preencha todos os campos corretamente.";
-        $tipoMensagem = "erro";
-    } else {
-
-        $sql = "INSERT INTO servicos (nome, preco, duracao)
-                    VALUES (?, ?, ?)";
-
-        $stmt = $conexao->prepare($sql);
-
-        $preco = floatval($preco);
-
-        $stmt->bind_param(
-            "sid",
-            $nome,
-            $preco,
-            $duracao
-        );
-
-        if ($stmt->execute()) {
-
-            $mensagem = "Serviço cadastrado com sucesso";
-            $tipoMensagem = "sucesso";
+            $mensagem = "Preencha todos os campos corretamente.";
+            $tipoMensagem = "erro";
         } else {
 
-            $mensagem = "Erro ao cadastrar serviço";
-            $tipoMensagem = "erro";
+            $sql = "INSERT INTO servicos (nome, preco, duracao)
+                        VALUES (?, ?, ?)";
+
+            $stmt = $conexao->prepare($sql);
+
+            $preco = floatval($preco);
+
+            $stmt->bind_param(
+                "sid",
+                $nome,
+                $preco,
+                $duracao
+            );
+
+            if ($stmt->execute()) {
+
+                $mensagem = "Serviço cadastrado com sucesso";
+                $tipoMensagem = "sucesso";
+            } else {
+
+                $mensagem = "Erro ao cadastrar serviço";
+                $tipoMensagem = "erro";
+            }
+
+            $stmt->close();
         }
-
-        $stmt->close();
     }
-}
 
-// LISTAR SERVIÇOS
+    // LISTAR SERVIÇOS
 
-$sql = "SELECT * FROM servicos
-            ORDER BY id DESC";
+    $sql = "SELECT * FROM servicos
+                ORDER BY id DESC";
 
-$resultado = $conexao->query($sql);
+    $resultado = $conexao->query($sql);
 
 ?>
 
@@ -95,9 +95,21 @@ $resultado = $conexao->query($sql);
                 <h2> Novo Serviço </h2>
             </div>
             <form method="POST" class="client-form">
-                <div class="form-group"> <label> Nome do serviço </label> <input type="text" name="nome" placeholder="Ex: Corte de cabelo" required> </div>
-                <div class="form-group"> <label> Preço (Kz) </label> <input type="number" name="preco" step="0.01" min="0" placeholder="5000" required> </div>
-                <div class="form-group"> <label> Duração (minutos) </label> <input type="number" name="duracao" min="1" placeholder="30" required> </div> <button type="submit" class="btn-primary"> + Cadastrar Serviço </button>
+                <div class="form-group"> 
+                    <label> Nome do serviço </label> 
+                    <input type="text" name="nome" placeholder="Ex: Corte de cabelo" required> 
+                </div>
+                <div class="form-group"> 
+                    <label> Preço (Kz) </label> 
+                    <input type="number" name="preco" step="0.01" min="0" placeholder="5000" required> 
+                </div>
+                <div class="form-group"> 
+                    <label> Duração (minutos) </label> 
+                    <input type="number" name="duracao" min="1" placeholder="30" required> 
+                </div> 
+                <button type="submit" class="btn-primary"> 
+                    + Cadastrar Serviço 
+                </button>
             </form>
         </section> <!-- LISTAGEM -->
         <section class="dashboard-section">
